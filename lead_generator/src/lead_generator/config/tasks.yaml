@@ -1,0 +1,20 @@
+extract_business_and_icp:
+  description: >
+    Analyze '{prompt}' to extract the business context and infer the Ideal Customer Profile (ICP), while scanning the web for additional insights to enrich the analysis. Today is {today}
+  expected_output: >
+    A structured object containing detailed business attributes and inferred ICP information saved in {file_path}.
+  agent: business
+
+fetch_leads:
+  description: >
+    Use business attributes and customer icp saved in {file_path}, to query the Apollo API and retrieve relevant lead data.
+  expected_output: >
+    A JSON object containing the fetched lead information saved in {leads_path}.
+  agent: apollo_fetcher
+
+format_response:
+  description: >
+    Format and present the retrieved data on leads saved in {leads_path} into a clear, user-friendly format that summarizes the findings for the end user.
+  expected_output: >
+    A structured output that clearly presents the lead details.
+  agent: response_formatter
