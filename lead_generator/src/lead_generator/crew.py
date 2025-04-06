@@ -5,18 +5,25 @@ from langchain_experimental.utilities import PythonREPL
 from dotenv import load_dotenv
 from crewai.tools import BaseTool
 import os
-from lead_generator.src.lead_generator.tools.custom_tool import OrganizationSearchTool, PeopleSearchTool
+from lead_generator.tools.custom_tool import OrganizationSearchTool, PeopleSearchTool
+from crewai.telemetry import Telemetry
 
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
-llm = LLM(
-  	model="ollama/llama3.2-vision",
-  	api_base="http://localhost:11434"
-  )
 
 load_dotenv()
 
+def noop(*args, **kwargs):
+    # with open("./logfile.txt", "a") as f:
+    #     f.write("Telemetry method called and noop'd\n")
+    pass
+
+
+for attr in dir(Telemetry):
+    if callable(getattr(Telemetry, attr)) and not attr.startswith("__"):
+        setattr(Telemetry, attr, noop)
+        
 SERPER_API_KEY=os.getenv("SERPER_API_KEY")
 
 class PythonREPLTool(BaseTool):
@@ -47,7 +54,6 @@ class LeadGenerator():
         return Agent(
             config=self.agents_config['business'],
             verbose=True,
-            llm=llm,
             tools=[SerperDevTool(), repl_tool]
         )
 
@@ -56,7 +62,6 @@ class LeadGenerator():
         return Agent(
             config=self.agents_config['apollo_fetcher'],
             verbose=True,
-            llm=llm,
             tools=[PeopleSearchTool(), OrganizationSearchTool(), repl_tool]
         )
     
@@ -65,7 +70,6 @@ class LeadGenerator():
         return Agent(
             config=self.agents_config['response_formatter'],
             verbose=True,
-            llm=llm,
             tools=[repl_tool]
         )
 

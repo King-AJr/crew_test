@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 import sys
 import warnings
-
 from datetime import datetime
+from lead_generator.crew import LeadGenerator
 
-from crew import LeadGenerator
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
