@@ -5,16 +5,44 @@ extract_business_and_icp:
     A structured object containing detailed business attributes and inferred ICP information saved in {file_path}.
   agent: business
 
-fetch_leads:
+generate_apollo_url:
   description: >
-    Use business attributes and customer icp saved in {file_path}, to query the Apollo API and retrieve relevant lead data.
+    Use the `build_apollo_people_url` tool to construct an Apollo people search URL based on the ICP professions and regions saved in {file_path}.
   expected_output: >
-    A JSON object containing the fetched lead information saved in {leads_path}.
-  agent: apollo_fetcher
+    A string containing the fully assembled Apollo URL, saved in {url_path}.
+  agent: build_apollo_people_url
 
-format_response:
+send_url_to_webhook:
   description: >
-    Format and present the retrieved data on leads saved in {leads_path} into a clear, user-friendly format that summarizes the findings for the end user.
+    Read the Apollo URL from {url_path} and send it as JSON payload to the webhook endpoint at {MAKE_WEBHOOK} via HTTP POST. The payload should be "apollo_url": <apollo_url>
   expected_output: >
-    A structured output that clearly presents the lead details.
-  agent: response_formatter
+    A report summarizing whether the URL delivery succeeded or failed, saved in {url_webhook_report}.
+  agent: url_webhook_sender
+
+# fetch_leads:
+#   description: >
+#     Use the profession specified in the customer ICP saved in {file_path} to perform a Google search with the query, get atleast 100 records:
+#     site:linkedin.com "PROFESSION" "@gmail.com" OR "@yahoo.com" OR "@hotmail.com" OR "@outlook.com" OR "@aol.com" OR "@icloud.com".
+#     For each result, extract and store the name, profession, email address, and LinkedIn profile URL. 
+
+#   expected_output: >
+#     A CSV file saved in {leads_path} with the following columns: name, profession, email, profile_link.
+#   agent: google_scraper
+
+
+# format_response:
+#   description: >
+#     Format and present the retrieved data on leads saved in {leads_path} into a clear, user-friendly format that summarizes the findings for the end user.
+#   expected_output: >
+#     A structured output that clearly presents the lead details.
+#   agent: response_formatter
+
+# send_to_webhook:
+#   description: >
+#     Read the CSV file at {leads_path}, and for each row extract first_name, last_name, and LinkedIn profile from the profile_link field.
+#     Parse the full name into first_name and last_name if not already separated. Then send each set of values to the webhook at:
+#     https://hook.eu2.make.com/vevh42339hnatdcd1cwji3mq5y7rquj7 via HTTP POST in JSON format.
+
+#   expected_output: >
+#     A summary report showing the number of successful and failed webhook transmissions for each entry in {leads_path}.
+#   agent: webhook_sender

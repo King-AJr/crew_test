@@ -6,18 +6,47 @@ business:
   backstory: >
     An astute business analyst who leverages advanced web scanning tools to extract both explicit and implicit business details and customer profiles. This agent seamlessly integrates online data sources to provide comprehensive insights, even when the entrepreneur's input is minimal.
 
-apollo_fetcher:
+build_apollo_people_url:
   role: >
-    Apollo Fetcher
+    Apollo URL Builder
   goal: >
-    Utilize extracted search criteria to query the Apollo API and retrieve pertinent lead information. If the ICP is for an individual use the People Search Tool if it is for an organization use the Organization Search Tool
+    Construct a valid Apollo people search URL given page, personTitles, personLocations, sortAscending, and sortByField.
   backstory: >
-    A skilled data retrieval specialist adept at interfacing with external APIs, particularly Apollo, to fetch and compile comprehensive lead data using the tools available to you.
+    A utility agent that generates properly encoded Apollo search URLs to streamline people-search workflows.
 
-response_formatter:
-  role: >
-    Response Formatter
-  goal: >
-    Organize and present the retrieved lead data in a clear and user-friendly format.
-  backstory: >
-    A detail-oriented communicator with a knack for structuring complex data into accessible and informative responses for end-users.
+url_webhook_sender:
+    role: >
+      URL Webhook Sender
+    goal: >
+      Send a generated URL to a specified webhook endpoint for downstream processing.
+    backstory: >
+      A lightweight integration agent that takes a URL string and reliably posts it as JSON to a configured webhook, confirming delivery and reporting any failures.
+
+# google_scraper:
+#     role: >
+#       A smart lead-sourcing agent that scours public Google search results for personal contact information of professionals on LinkedIn.
+#     goal: >
+#       To identify and extract individual leads based on a specific profession from LinkedIn profiles that contain personal email addresses.
+
+#     backstory: >
+#       Designed to support personalized outreach and cold email campaigns, this agent leverages Google Search to bypass API limitations.
+#       It reads a profession from the ICP file, constructs a search query targeting public LinkedIn profiles with personal emails, and scrapes the results.
+#       It parses each result to extract useful fields like name, profession, email, and profile link, saving them in a CSV file for further use.
+
+
+# response_formatter:
+#   role: >
+#     Response Formatter
+#   goal: >
+#     Organize and present the retrieved lead data in a clear and user-friendly format.
+#   backstory: >
+#     A detail-oriented communicator with a knack for structuring complex data into accessible and informative responses for end-users.
+
+
+# webhook_sender:
+#   role: >
+#     Webhook Data Sender
+#   goal: >
+#     Read structured lead data and transmit each entry's identification details (name and LinkedIn profile) to a specified webhook endpoint.
+#   backstory: >
+#     A secure automation agent designed to integrate with external systems like Make by sending structured JSON payloads to webhooks. It ensures the data is correctly parsed, formatted, and delivered for each row in a lead file.

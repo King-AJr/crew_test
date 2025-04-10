@@ -2,8 +2,8 @@
 import sys
 import warnings
 from datetime import datetime
-from lead_generator.crew import LeadGenerator
-
+from crew import LeadGenerator
+import os
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -12,14 +12,19 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
 
+MAKE_WEBHOOK = os.getenv('MAKE_WEBHOOK')
+
 def run(prompt: str):
     """
     Run the crew.
     """
     inputs = {
         'file_path': 'icp.txt',
-        'leads': 'leads.csv',
+        'leads_path': 'leads.csv',
         "prompt": prompt,
+        "MAKE_WEBHOOK": MAKE_WEBHOOK,
+        "url_webhook_report": "url_webhook_report.txt",
+        'url_path': 'url_path.txt',
         "today": str(datetime.now())
     }
     

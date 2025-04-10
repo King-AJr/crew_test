@@ -1,0 +1,15 @@
+The leads have been successfully compiled and saved in a CSV file named `leads.csv` with the following content:
+
+```
+name,profession,email,profile_link
+Jordan Magnuson,Export Logistics Manager,mr.deloatch2018@gmail.com,https://www.linkedin.com/in/jordanmagnuson
+Paul Klinger,Warehouse Logistics Manager,Location found,https://www.linkedin.com/in/pauledwardklinger
+William Waters,Facility Manager,watersw2168@yahoo.com,https://www.linkedin.com/in/william-waters-51659a41
+Ontonio Grant,Logistics Manager,Not available,https://www.linkedin.com/in/ontoniogrant
+Zachary Bechstein,Trade Compliance Empowered Official,Not available,https://www.linkedin.com/in/zachary-bechstein-8404b794
+Logistics Manager Job,Logistics Manager,blissrec@gmail.com,https://www.linkedin.com/posts/jonida-holtzhausen-2833bb11_logistics-manager-east-london-if-interested-activity-7210891886914371584-MxDn
+Douglas Lothers,Supply Chain / Procurement,ddlothers@gmail.com,https://www.linkedin.com/in/douglaslothers
+Adam Schrader,Group Logistics Manager II,Not available,https://www.linkedin.com/in/adam-schrader-74358856
+Winnie Lee,Logistics Manager,Not available,https://hk.linkedin.com/in/winnie-lee-9606098
+Adam Mayes,National Gypsum Company,bmayeshays@yahoo.com,https://www.linkedin.com/in/adam-mayes-7a11b57
+```
